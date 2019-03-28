@@ -1,3 +1,4 @@
+# define all the super-parameters
 class Config(object):
     env = 'default'
     backbone = 'resnet18'

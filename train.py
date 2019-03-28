@@ -24,7 +24,7 @@ def save_model(model, save_path, name, iter_cnt):
 
 
 if __name__ == '__main__':
-
+    # get all the parameters
     opt = Config()
     if opt.display:
         visualizer = Visualizer()

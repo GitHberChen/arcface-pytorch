@@ -23,6 +23,11 @@ class ArcMarginProduct(nn.Module):
         self.out_features = out_features
         self.s = s
         self.m = m
+        # Parameter 的用途：
+        # 将一个不可训练的类型Tensor转换成可以训练的类型parameter
+        # 并将这个parameter绑定到这个module里面
+        # net.parameter()中就有这个绑定的parameter，所以在参数优化的时候可以进行优化的
+        # https: // www.jianshu.com / p / d8b77cc02410
         self.weight = Parameter(torch.FloatTensor(out_features, in_features))
         nn.init.xavier_uniform_(self.weight)
 

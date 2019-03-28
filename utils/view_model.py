@@ -3,7 +3,6 @@ from torch.autograd import Variable
 import torch.nn as nn
 from graphviz import Digraph
 
-
 __all__ = ['view_model']
 
 
@@ -20,7 +19,7 @@ class CNN(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2)
         )
-        self.out = nn.Linear(32*7*7, 10)
+        self.out = nn.Linear(32 * 7 * 7, 10)
 
     def forward(self, x):
         x = self.conv1(x)
@@ -53,7 +52,7 @@ def make_dot(var, params=None):
     seen = set()
 
     def size_to_str(size):
-        return '('+(', ').join(['%d' % v for v in size])+')'
+        return '(' + (', ').join(['%d' % v for v in size]) + ')'
 
     def add_nodes(var):
         if var not in seen:
@@ -76,6 +75,7 @@ def make_dot(var, params=None):
                 for t in var.saved_tensors:
                     dot.edge(str(id(t)), str(id(var)))
                     add_nodes(t)
+
     add_nodes(var.grad_fn)
     return dot
 
@@ -98,9 +98,11 @@ def view_model(net, input_shape):
     print("total parameters:" + str(k))
 
 
+# 教程
+# https://casatwy.com/shi-yong-dotyu-yan-he-graphvizhui-tu-fan-yi.html
 if __name__ == '__main__':
     net = CNN()
-    view_model(net)
+    view_model(net, [16, 3, 224, 224])
     # x = Variable(torch.randn(1, 1, 28, 28))
     # y = net(x)
     # g = make_dot(y)

@@ -9,6 +9,8 @@ import torch
 import torch.nn as nn
 
 
+# FocalLoss的讲解
+# https://zhuanlan.zhihu.com/p/32423092
 class FocalLoss(nn.Module):
 
     def __init__(self, gamma=0, eps=1e-7):

@@ -11,7 +11,6 @@ import torch.utils.model_zoo as model_zoo
 import torch.nn.utils.weight_norm as weight_norm
 import torch.nn.functional as F
 
-
 # __all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101',
 #            'resnet152']
 
@@ -140,15 +139,16 @@ class Bottleneck(nn.Module):
         return out
 
 
+# Squeeze-and-Excitation Networks
 class SEBlock(nn.Module):
     def __init__(self, channel, reduction=16):
         super(SEBlock, self).__init__()
         self.avg_pool = nn.AdaptiveAvgPool2d(1)
         self.fc = nn.Sequential(
-                nn.Linear(channel, channel // reduction),
-                nn.PReLU(),
-                nn.Linear(channel // reduction, channel),
-                nn.Sigmoid()
+            nn.Linear(channel, channel // reduction),
+            nn.PReLU(),
+            nn.Linear(channel // reduction, channel),
+            nn.Sigmoid()
         )
 
     def forward(self, x):
